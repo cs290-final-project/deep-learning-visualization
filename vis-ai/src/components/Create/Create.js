@@ -1,7 +1,6 @@
 import '../../App.css';
-import './Create.css';
 import React from 'react';
-import Card from '../generic_components/Card';
+
  
 const Create = () => {
     return (
@@ -9,7 +8,7 @@ const Create = () => {
            <div class="col-3">
                <h1>Layer Selector</h1>
                <p>Drag and drop different layer types into your net</p>
-               <Card />
+
            </div>
            <div class="col-6">
                <h1>Network Visualization</h1>

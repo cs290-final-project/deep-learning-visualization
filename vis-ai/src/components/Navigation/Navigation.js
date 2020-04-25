@@ -14,6 +14,7 @@ const Navigation = () => {
             <Nav.Link href="/Train">Train</Nav.Link>
             <Nav.Link href="/Metrics">Metrics</Nav.Link>
             <Nav.Link href="/Predict">Predict</Nav.Link>
+            <Nav.Link href="/ProjectSummary">Project Summary</Nav.Link>
         </Navbar>
     );
 }
