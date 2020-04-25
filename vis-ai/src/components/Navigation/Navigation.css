@@ -1,7 +1,26 @@
 .navbar {
-    background-color: #D62828;
+    background-color: #003049;
+    font-weight: bold;
 }
 
-.navbar-brand {
-    color: red;
+.navbar :hover {
+    color:#F77F00;
 }
+
+.navbar-light .navbar-brand {
+    color:#EAE2B7;
+}
+
+.navbar-light .navbar-brand :hover {
+    color: #F77F00;
+}
+
+.navbar a {
+    color:#EAE2B7;
+}
+
+.navbar a :hover {
+    color:#F77F00;
+}
+
+

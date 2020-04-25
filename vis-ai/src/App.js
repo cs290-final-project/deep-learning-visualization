@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
  
 import Navigation from './components/Navigation/Navigation';
-import Create from './components/Create';
-import Train from './components/Train';
-import Metrics from './components/Metrics';
-import Predict from './components/Predict';
+import Create from './components/Create/Create';
+import Train from './components/Train/Train';
+import Metrics from './components/Metrics/Metrics';
+import Predict from './components/Predict/Predict';
+
 import Error from './components/Error';
 
  
