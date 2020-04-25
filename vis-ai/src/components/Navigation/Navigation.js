@@ -1,16 +1,25 @@
 import React from 'react';
-import './Navigation.css';
+import { Button, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap'
+import Navbar from 'react-bootstrap/Navbar'
+import './Navigation.css'
+
  
 import { NavLink } from 'react-router-dom';
  
 const Navigation = () => {
     return (
-       <div class="App">
-           <NavLink to="/">Create</NavLink>
-           <NavLink to="/Train">Train</NavLink>
-           <NavLink to="/Metrics">Metrics</NavLink>
-           <NavLink to="/Predict">Predict</NavLink>
-       </div>
+        <Navbar>
+            <Navbar.Brand href="/">Vis-AI</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link href="/">Create</Nav.Link>
+                    <Nav.Link href="/Train">Train</Nav.Link>
+                    <Nav.Link href="/Metrics">Metrics</Nav.Link>
+                    <Nav.Link href="/Predict">Predict</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );
 }
  

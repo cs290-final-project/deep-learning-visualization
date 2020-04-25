@@ -5,7 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Create from './components/Create';
 import Train from './components/Train';
 import Metrics from './components/Metrics';
-import Predict from './components/Metrics';
+import Predict from './components/Predict';
 import Error from './components/Error';
 
  
