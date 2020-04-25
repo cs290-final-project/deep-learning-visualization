@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
  
+import Navigation from './components/Navigation/Navigation';
 import Create from './components/Create';
 import Train from './components/Train';
 import Metrics from './components/Metrics';
 import Predict from './components/Metrics';
 import Error from './components/Error';
-import Navigation from './components/Navigation';
 
  
 class App extends Component {
