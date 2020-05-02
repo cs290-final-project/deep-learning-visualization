@@ -6,6 +6,7 @@ import Create from './components/Create/Create';
 import Train from './components/Train/Train';
 import Metrics from './components/Metrics/Metrics';
 import Predict from './components/Predict/Predict';
+import ProjectSummary from './components/ProjectSummary/ProjectSummary';
 
 import Error from './components/Error';
 
@@ -21,6 +22,7 @@ class App extends Component {
              <Route path="/Train" component={Train}/>
              <Route path="/Metrics" component={Metrics}/>
              <Route path="/Predict" component={Predict}/>
+             <Route path="/ProjectSummary" component={ProjectSummary}/>
             <Route component={Error}/>
            </Switch>
         </div> 
