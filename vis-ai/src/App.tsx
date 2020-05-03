@@ -5,15 +5,18 @@ import Backend from "react-dnd-html5-backend";
 import { render } from "@testing-library/react";
 
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Counter from "./Components/Counter";
 import Layer from "./Components/layer/Layer";
-import Network from "./Components/network/Network";
+import Example from "./Components/network/Network";
 
 function App() {
   return (
     <div className="App">
-      <Network></Network>
+      <DndProvider backend={Backend}>
+        <Example />
+      </DndProvider>
     </div>
   );
 }
