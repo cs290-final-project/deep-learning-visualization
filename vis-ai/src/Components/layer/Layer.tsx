@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
+import MyForm from "./MyForm";
 
 const style = {
   border: "1px dashed gray",
@@ -11,13 +12,13 @@ const style = {
   cursor: "move",
 };
 
-export interface CardProps {
+export interface LayerProps {
   id: any;
-  text: string;
+  type: string;
   index: number;
   width: number;
   activation: string;
-  moveCard: (dragIndex: number, hoverIndex: number) => void;
+  moveLayer: (dragIndex: number, hoverIndex: number) => void;
 }
 
 interface DragItem {
@@ -25,13 +26,13 @@ interface DragItem {
   id: string;
   type: string;
 }
-const Card: React.FC<CardProps> = ({
+const Layer: React.FC<LayerProps> = ({
   id,
-  text,
+  type,
   index,
   width,
   activation,
-  moveCard,
+  moveLayer,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
@@ -76,7 +77,7 @@ const Card: React.FC<CardProps> = ({
       }
 
       // Time to actually perform the action
-      moveCard(dragIndex, hoverIndex);
+      moveLayer(dragIndex, hoverIndex);
 
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
@@ -96,14 +97,20 @@ const Card: React.FC<CardProps> = ({
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <div className="layer-grid">
+    <div style={{ alignContent: "center" }}>
       <div ref={ref} style={{ ...style, opacity }}>
-        <h1>{text}</h1>
+        <h1>Layer {id}</h1>
+        <MyForm
+          onSubmit={({ type }) => {
+            console.log(type);
+          }}
+        />
+        {/* <h1>{type}</h1>
         <p>{width}</p>
-        <p>{activation}</p>
+        <p>{activation}</p> */}
       </div>
     </div>
   );
 };
 
-export default Card;
+export default Layer;

@@ -4,12 +4,8 @@ import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import { render } from "@testing-library/react";
 import { Container, Row, Col } from "react-bootstrap";
-
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import Layer from "./Components/layer/Layer";
-import Example from "./Components/network/Network";
+import MyForm from "./Components/layer/MyForm";
+import Network from "./Components/network/Network";
 
 function App() {
   return (
@@ -20,9 +16,8 @@ function App() {
             <h1>Layer Selector</h1>
           </Col>
           <Col md={4}>
-            <h1>Network</h1>
             <DndProvider backend={Backend}>
-              <Example />
+              <Network />
             </DndProvider>
           </Col>
           <Col md={4}>
