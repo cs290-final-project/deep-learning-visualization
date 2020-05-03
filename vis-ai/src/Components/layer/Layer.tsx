@@ -3,11 +3,9 @@ import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 
-import ReactBootstrap from "react-bootstrap";
-
 const style = {
   border: "1px dashed gray",
-  padding: "0.25rem .5rem",
+  padding: "0.5rem .5rem",
   marginBottom: ".5rem",
   backgroundColor: "white",
   cursor: "move",
@@ -98,13 +96,13 @@ const Card: React.FC<CardProps> = ({
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <Grid>
-      <Row>
-        <p>Layer Type: {text}</p>
-        <p>Layer Width:{width}</p>
-        <p>Activation: {activation}</p>
-      </Row>
-    </Grid>
+    <div className="layer-grid">
+      <div ref={ref} style={{ ...style, opacity }}>
+        <h1>{text}</h1>
+        <p>{width}</p>
+        <p>{activation}</p>
+      </div>
+    </div>
   );
 };
 
