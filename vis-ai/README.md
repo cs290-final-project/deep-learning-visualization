@@ -9,9 +9,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+To directly interact with React run in the project directory /client (this will not start the node.js server)
 
 ### `npm start`
+
+start backend for development.
+###    `npm run server` 
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
