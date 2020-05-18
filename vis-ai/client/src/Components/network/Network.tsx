@@ -98,7 +98,7 @@ const Network: React.FC = () => {
         <Container>
           <Col>
             <Row>
-              <h1>Network</h1>
+              <h1>Network: {layers.length} Layers</h1>
               <IconButton onClick={addLayer} style={buttonStyle}>
                 <AddIcon />
               </IconButton>
