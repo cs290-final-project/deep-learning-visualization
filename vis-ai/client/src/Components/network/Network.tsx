@@ -39,15 +39,15 @@ const Network: React.FC = () => {
       },
       {
         id: 2,
-        type: "Conv2d",
-        width: 128,
-        activation: "ReLU",
+        type: "MaxPool2d",
+        width: 64,
+        activation: "Sigmoid",
       },
       {
         id: 3,
-        type: "Conv2d",
-        width: 128,
-        activation: "ReLU",
+        type: "Linear",
+        width: 10,
+        activation: "Softmax",
       },
     ]);
 

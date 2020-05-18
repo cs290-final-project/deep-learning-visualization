@@ -101,6 +101,7 @@ const Layer: React.FC<LayerProps> = ({
       <div ref={ref} style={{ ...style, opacity }}>
         <h1>Layer {id}</h1>
         <MyForm
+          initialValues={{ type, width, activation }}
           onSubmit={({ type }) => {
             console.log(type);
           }}

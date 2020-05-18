@@ -1,15 +1,8 @@
-import {
-  Button,
-  Select,
-  MenuItem,
-  InputLabel,
-  Grid,
-  FormControl,
-} from "@material-ui/core";
+import { Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import * as React from "react";
 import MyField from "./MyField";
-import MySlider from "./MySlider";
+import MySelect from "./MySelect";
 
 interface Values {
   type: string;
@@ -29,14 +22,29 @@ const formContainerStyle = {
   padding: 10,
 };
 
+const activations = {
+  name: "activation",
+  options: ["ReLU", "Sigmoid", "Softmax"],
+};
+
+const types = {
+  name: "type",
+  options: ["Conv2d", "Linear", "Softmax"],
+};
+
 interface Props {
+  initialValues: {
+    type: string;
+    width: number;
+    activation: string;
+  };
   onSubmit: (values: Values) => void;
 }
 
-const MyForm: React.FC<Props> = ({ onSubmit }) => {
+const MyForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
   return (
     <Formik
-      initialValues={{ type: "Conv2d", width: 128, activation: "ReLU" }}
+      initialValues={initialValues}
       onSubmit={(values) => {
         onSubmit(values);
       }}
@@ -44,29 +52,21 @@ const MyForm: React.FC<Props> = ({ onSubmit }) => {
       {({ values }) => (
         <Form>
           <div style={formContainerStyle}>
-            <FormControl style={formItem}>
-              <InputLabel>Layer Type</InputLabel>
-              <Field as={Select} name="type">
-                <MenuItem value="">None</MenuItem>
-                <MenuItem value={"Conv2d"}>Conv2d</MenuItem>
-                <MenuItem value={"Linear"}>Linear</MenuItem>
-                <MenuItem value={"MaxPool2d"}>MaxPool2d</MenuItem>
-              </Field>
-            </FormControl>
+            <MySelect
+              name={types.name}
+              options={types.options}
+              style={formItem}
+            />
 
             <FormControl style={formItem}>
               <Field name="width" component={MyField} label="Width" />
             </FormControl>
 
-            <FormControl style={formItem}>
-              <InputLabel>Activation</InputLabel>
-              <Field as={Select} name="activation">
-                <MenuItem value="">None</MenuItem>
-                <MenuItem value={"ReLU"}>ReLU</MenuItem>
-                <MenuItem value={"Sigmoid"}>Sigmoid</MenuItem>
-                <MenuItem value={"Softmax"}>Softmax</MenuItem>
-              </Field>
-            </FormControl>
+            <MySelect
+              name={activations.name}
+              options={activations.options}
+              style={formItem}
+            />
           </div>
 
           {/* <Button type="submit">submit</Button> */}
