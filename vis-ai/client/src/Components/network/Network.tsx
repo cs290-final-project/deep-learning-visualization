@@ -10,16 +10,12 @@ const style = {
   width: 400,
 };
 
-// const buttonStyle = {
-//   right: 30,
-//   bottom: 30,
-//   height: 60,
-//   border-radius: 30,
-//   font-size: 30,
-//   color: #fff,
-//   cursor: pointer,
-//   box-shadow: 4 4 12 rgba(0, 0, 0, 0.25),
-// };
+const buttonStyle = {
+  backgroundColor: "#f00",
+  cursor: "pointer",
+  color: "#fff",
+  boxShadow: "4px 4px 12px rgba(0, 0, 0, 0.25)",
+};
 
 export interface Item {
   id: number;
@@ -103,7 +99,7 @@ const Network: React.FC = () => {
           <Col>
             <Row>
               <h1>Network</h1>
-              <IconButton id="addLayerButton" onClick={addLayer}>
+              <IconButton onClick={addLayer} style={buttonStyle}>
                 <AddIcon />
               </IconButton>
             </Row>
