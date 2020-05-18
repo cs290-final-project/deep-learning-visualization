@@ -3,10 +3,22 @@ import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
 import { Container, Row, Col } from "react-bootstrap";
 import { Button } from "@material-ui/core";
+import { SocialSentimentSatisfied } from "material-ui/svg-icons";
 
 const style = {
   width: 400,
 };
+
+// const buttonStyle = {
+//   right: 30,
+//   bottom: 30,
+//   height: 60,
+//   border-radius: 30,
+//   font-size: 30,
+//   color: #fff,
+//   cursor: pointer,
+//   box-shadow: 4 4 12 rgba(0, 0, 0, 0.25),
+// };
 
 export interface Item {
   id: number;
@@ -74,6 +86,16 @@ const Network: React.FC = () => {
       );
     };
 
+    const addLayer = () => {
+      const newLayer = {
+        id: layers.length + 1,
+        type: "Conv2d",
+        width: 128,
+        activation: "ReLU",
+      };
+      setLayers([...layers, newLayer]);
+    };
+
     return (
       <>
         <Container>
@@ -81,7 +103,10 @@ const Network: React.FC = () => {
             <Row>
               <h1>Network</h1>
             </Row>
-            <div style={style}>
+            <Button id="addLayerButton" onClick={addLayer}>
+              <h1>Add Layer</h1>
+            </Button>
+            <div id="layerContainer" style={style}>
               {layers.map((layer, i) => renderLayer(layer, i))}
             </div>
           </Col>
