@@ -11,7 +11,7 @@ export interface SelectProps {
 const MySelect: React.FC<SelectProps> = ({ name, options, style }) => {
   return (
     <FormControl style={style}>
-      <InputLabel>Layer Type</InputLabel>
+      <InputLabel>{name.charAt(0).toUpperCase() + name.slice(1)}</InputLabel>
       <Field as={Select} name={name}>
         {options.map((option, i) => {
           return <MenuItem value={option}>{option}</MenuItem>;
