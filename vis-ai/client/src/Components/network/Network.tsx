@@ -2,8 +2,9 @@ import update from "immutability-helper";
 import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
 import { Container, Row, Col } from "react-bootstrap";
-import { Button } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { SocialSentimentSatisfied } from "material-ui/svg-icons";
+import AddIcon from "@material-ui/icons/Add";
 
 const style = {
   width: 400,
@@ -102,10 +103,10 @@ const Network: React.FC = () => {
           <Col>
             <Row>
               <h1>Network</h1>
+              <IconButton id="addLayerButton" onClick={addLayer}>
+                <AddIcon />
+              </IconButton>
             </Row>
-            <Button id="addLayerButton" onClick={addLayer}>
-              <h1>Add Layer</h1>
-            </Button>
             <div id="layerContainer" style={style}>
               {layers.map((layer, i) => renderLayer(layer, i))}
             </div>

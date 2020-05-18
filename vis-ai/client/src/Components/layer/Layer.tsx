@@ -105,9 +105,6 @@ const Layer: React.FC<LayerProps> = ({
             console.log(type);
           }}
         />
-        {/* <h1>{type}</h1>
-        <p>{width}</p>
-        <p>{activation}</p> */}
       </div>
     </div>
   );
