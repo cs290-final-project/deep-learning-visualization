@@ -29,7 +29,7 @@ const activations = {
 
 const types = {
   name: "type",
-  options: ["Conv2d", "Linear", "Softmax"],
+  options: ["Conv2d", "MaxPool2d", "Linear"],
 };
 
 interface Props {
