@@ -22,15 +22,8 @@ const formContainerStyle = {
   padding: 10,
 };
 
-const activations = {
-  name: "activation",
-  options: ["ReLU", "Sigmoid", "Softmax"],
-};
-
-const types = {
-  name: "type",
-  options: ["Conv2d", "MaxPool2d", "Linear"],
-};
+const funcs = ["ReLU", "Sigmoid", "Softmax"];
+const types = ["Conv2d", "MaxPool2d", "Linear"];
 
 interface Props {
   initialValues: {
@@ -52,21 +45,13 @@ const MyForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
       {({ values }) => (
         <Form>
           <div style={formContainerStyle}>
-            <MySelect
-              name={types.name}
-              options={types.options}
-              style={formItem}
-            />
+            <MySelect name={"type"} options={types} style={formItem} />
 
             <FormControl style={formItem}>
               <Field name="width" component={MyField} label="Width" />
             </FormControl>
 
-            <MySelect
-              name={activations.name}
-              options={activations.options}
-              style={formItem}
-            />
+            <MySelect name={"activation"} options={funcs} style={formItem} />
           </div>
 
           {/* <Button type="submit">submit</Button> */}
