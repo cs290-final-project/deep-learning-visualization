@@ -47,5 +47,6 @@
   "devDependencies": {
     "@types/material-ui": "^0.21.7",
     "typescript": "^3.8.3"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

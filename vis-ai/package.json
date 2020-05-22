@@ -4,10 +4,13 @@
   "description": "neural net visualizer",
   "main": "server.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "server": "nodemon server.js"
-  },
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
   "author": "Andrew, Shaur, Phil",
   "license": "ISC",
   "dependencies": {

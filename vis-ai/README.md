@@ -9,18 +9,29 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+### Run Server
+To run both the react client and connect to the backend run the following command in the root directroy:
+
+### `npm run dev` 
+This will launch the react app on port 3000 and the backend on port 5000
+i.e. localhost:3000 will open the react app
+localhost:5000/api/items will allow to interact with the database
+
+
 To directly interact with React run in the project directory /client (this will not start the node.js server)
 
 ### `npm start`
 
 start backend for development.
 ###    `npm run server` 
+runs on localhost:5000
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
+Node.js will reload server.js if you make edits.
 You will also see any lint errors in the console.
+
+###    `npm run client-install` 
+Installs React dependencies from root directory
+
 
 ### `npm test`
 
