@@ -1,4 +1,4 @@
-import { Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
+import { FormControl } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import * as React from "react";
 import MyField from "./MyField";
