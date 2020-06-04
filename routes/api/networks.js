@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const textSearch = require('mongoose-partial-full-search');
 
 // Network Model
 
@@ -13,6 +14,13 @@ router.get('/', (req, res) => {
         .sort({ date: -1 })
         .then(items => res.json(items))
 });
+
+//basic name search: searches by name of network
+router.get('/:searchquery', (req, res) => {
+    Network.search(req.params.searchquery)
+        .then(items => res.json(items))
+    });
+//return items matching query
 
 // @route POST api/items
 // @desc Create a visualization
