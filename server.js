@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const items = require('./routes/api/items');
+const static = require('./routes/api/static');
+const networks = require('./routes/api/networks');
+//const layers = require('./routes/api/layers');
 
 
 
@@ -24,6 +27,8 @@ mongoose
 //Use Routes
 
 app.use('/api/items', items);
+app.use('/api/static', static);
+app.use('/api/networks', networks);
 
 //Served compiled static React content in production
 if(process.env.NODE_ENV === 'production') {

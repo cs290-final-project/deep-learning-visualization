@@ -10,6 +10,8 @@ const style = {
   marginBottom: ".5rem",
   backgroundColor: "white",
   cursor: "move",
+  transition: "0.5s"
+  
 };
 
 export interface LayerProps {
