@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-var textSearch = require('mongoose-partial-full-search');
 
 const Schema = mongoose.Schema;
 //const LayerSchema = require('Layer');
@@ -71,9 +70,6 @@ const NetworkSchema = new Schema({
         //required: true
     }}]
 });
-
-NetworkSchema.plugin(textSearch);
-NetworkSchema.index({ name: 'text' });
 
 module.exports = Network = mongoose.model('network', NetworkSchema);
 //module.exports = Layer = mongoose.model('layer', LayerSchema);

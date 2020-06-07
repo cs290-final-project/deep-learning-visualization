@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-// Network Model
+// Layer Model
 
-const Network = require('../../models/Network');
+const Layer = require('../../models/Layer');
 
 // @route GET api/items
 // @desc GET All Visualizations
 // @access Public
 router.get('/', (req, res) => {
-    Network.find()
+    Layer.find()
         .sort({ date: -1 })
         .then(items => res.json(items))
 });
@@ -18,21 +18,18 @@ router.get('/', (req, res) => {
 // @desc Create a visualization
 // @access Public
 router.post('/', (req, res) => {
-    const newNetwork = new Network({
-        name: req.body.name,
-        description: req.body.description,
-        author: req.body.author,
-        layers: req.body.layers
+    const newLayer = new Layer({
+        name: req.body.name
         //other fields will go here
     });
-    newNetwork.save().then(item => res.json(item));
+    newLayer.save().then(item => res.json(item));
 });
 
 // @route DELETE api/items/:id
 // @desc Delete a Post
 // @access Public
 router.delete('/:id', (req, res) => {
-    Network.findById(req.params.id)
+    Layer.findById(req.params.id)
         .then(item => item.remove().then(() => res.json({ sucesss: true })))
         .catch(err => res.status(404).json({ success: false }));
 });
