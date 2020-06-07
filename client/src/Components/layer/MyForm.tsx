@@ -1,4 +1,4 @@
-import { FormControl } from "@material-ui/core";
+import { FormControl, Card } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import * as React from "react";
 import MyField from "./MyField";
@@ -36,10 +36,12 @@ interface Props {
 
 const MyForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
   return (
+    <Card>
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
         onSubmit(values);
+        
       }}
     >
       {({ values }) => (
@@ -53,12 +55,15 @@ const MyForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
 
             <MySelect name={"activation"} options={funcs} style={formItem} />
           </div>
-
-          {/* <Button type="submit">submit</Button> */}
+          
+   
+          
           <pre>{JSON.stringify(values, null, 2)}</pre>
         </Form>
       )}
+          
     </Formik>
+    </Card>
   );
 };
 

@@ -1,9 +1,13 @@
 import update from "immutability-helper";
 import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
+import CustomizedSnackbars from "./Snackbar";
 import { Container, Row, Col } from "react-bootstrap";
-import { IconButton } from "@material-ui/core";
+import { Snackbar, Card, Button, IconButton, TextField, TextareaAutosize } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import Axios from "axios";
+import { Field, Form, Formik } from "formik";
+
 
 const style = {
     width: 400,
@@ -24,10 +28,16 @@ export interface Item {
 }
 
 export interface NetworkState {
+    name: string;
+    creator: string;
+    description: string;
     layers: Item[];
 }
 
+
+
 const Network: React.FC = () => {
+    const [NetworkState, setNetworkState] = useState();
     const [layers, setLayers] = useState([
         {
             id: 1,
@@ -91,6 +101,8 @@ const Network: React.FC = () => {
         setLayers([...layers, newLayer]);
     };
 
+ 
+
     return (
         <>
             <Container>
@@ -99,6 +111,55 @@ const Network: React.FC = () => {
                     <IconButton onClick={addLayer} style={buttonStyle}>
                         <AddIcon />
                     </IconButton>
+
+            
+                    <Card>
+                    <Formik initialValues={{title: '', description: '', creator: '', saved: false}} onSubmit={(data, {setSubmitting}) => {
+                        //var saved = false;
+                        
+                        const newNetwork = {
+                            //id: layers.length + 1,
+                            name: data.title,
+                            description: data.description,
+                            creator: data.creator,
+                            layers: layers
+                        };
+                        
+                        Axios ({
+                            url: '/api/networks',
+                            method: 'POST',
+                            data: newNetwork
+                        })
+                        .then(() => {
+                            console.log('Data has been sent to the server');
+                            data.saved = true;
+                            setSubmitting(false);
+                            //setStatus(true);
+
+                        })
+                        .catch(() => {
+                            //alert("Could not save, error communicating with server");
+                        })
+                        
+                        console.log(data);
+                        console.log(layers);
+                        
+                        
+                    }}>
+                        
+                        {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
+                        <form onSubmit={handleSubmit}>
+                            <div><Field disabled={isSubmitting} variant="outlined" required="true" label="Network Title" name="title" as={TextField} /> </div>
+                            <Field disabled={isSubmitting} variant="outlined" label="Creator" name="creator" as={TextField} />
+                            <Field disabled={isSubmitting} variant="outlined" multiline label="Description" name="description" rows={3} as={TextField} />
+                            
+                            <pre>{JSON.stringify(values, null, 2)}</pre>
+                            <Button variant="outlined" color="primary" disabled={isSubmitting} type="submit">Submit</Button>
+                            {(isSubmitting) && <CustomizedSnackbars />}
+                        </form>
+                        
+                    )}</Formik>
+                    </Card>
                 </Row>
                 <div id="layerContainer" style={style}>
                     {layers.map((layer, i) => renderLayer(layer, i))}

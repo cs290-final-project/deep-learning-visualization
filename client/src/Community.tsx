@@ -3,6 +3,7 @@
   import React, { useCallback, useState, useEffect } from "react";
   import { Container, Row, Col } from "react-bootstrap";
   import ComNetwork from "./Components/network/ComNetwork";
+  import { CircularProgress, LinearProgress } from "@material-ui/core";
   import axios from 'axios';
   
   export interface Layer { id: number; type: string; width: number; activation: string }
@@ -19,6 +20,7 @@
   }
   const Community: React.FC = () => {
       const [networks, useNetworks] = useState([]);
+      const [loading, setLoading] = useState(true);
       
       React.useEffect(() => {
         const FetchData = async () => {
@@ -26,6 +28,7 @@
             console.log(response.data);
             console.log("Hey this function is run");
             useNetworks(response.data);
+            setLoading(false);
         }
         
         FetchData();
@@ -39,6 +42,7 @@
           layers: Layer[],
       }) => {
           return (
+            
               <ComNetwork
                   name={network.name}
                   description={network.description}
@@ -52,7 +56,8 @@
       return (
           <>
               <Container>
-                  <h1>Community Networks</h1>
+                  
+                  {loading ? <LinearProgress /> : <h1>Community Networks</h1>}
                   {networks.map((net) => renderNetwork(net))}
               </Container>
           </>

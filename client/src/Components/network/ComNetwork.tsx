@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 export interface Layer { id: number; type: string; width: number; activation: string }
 
@@ -12,14 +13,13 @@ export interface Network {
 }
 
 const style = {
-    border: "1px dashed gray",
+    //border: "1px dashed gray",
     padding: "0.5rem .5rem",
     marginBottom: ".5rem",
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     cursor: "pointer",
     width: 600
 };
-
 
 
 const ComNetwork: React.FC<Network> = ({
@@ -47,13 +47,13 @@ const ComNetwork: React.FC<Network> = ({
 
     return (
         <div style={style}>
-            <Container>
+            <Card>
                 <Row>
                     <Col md={3}><h2>{network.name}</h2></Col>
-                    <Col md={3}><h3>{network.creator}</h3></Col>
+                    <Col md={3}><h4>{network.description}</h4></Col>
                 </Row>
                 <Row xs={1} md={2}>
-                    <Col md={3}>{network.description}</Col>
+                    <Col md={3}>{network.creator}</Col>
                     <Col md={3}>
                         <h4>Layers:</h4>
                         <table style={{ width: "100%" }}>
@@ -66,7 +66,7 @@ const ComNetwork: React.FC<Network> = ({
                         </table>
                     </Col>
                 </Row>
-            </Container>
+            </Card>
         </div>
     );
 };
