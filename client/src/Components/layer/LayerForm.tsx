@@ -1,5 +1,6 @@
 import { FormControl, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FieldProps } from "formik";
+import { TextFieldProps } from "material-ui";
 import * as React from "react";
 import { render } from "@testing-library/react";
 
@@ -61,8 +62,8 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
                     <div style={formContainerStyle}>
                         {renderSelector("type", types)}
                         <FormControl style={formItem}>
-                            <Field name="width" render={( {placeholder} : { placeholder: string}, {field} : { field: any} ) => {
-                                return <TextField label={"Width"} placeholder={placeholder} {...field} />;
+                            <Field name="width" render={(props: FieldProps) => {
+                                return <TextField label={"Width"} {...props.field} />;
                             }} />
                         </FormControl>
                         {renderSelector("activation", funcs)}
