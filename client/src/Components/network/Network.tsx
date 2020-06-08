@@ -9,6 +9,7 @@ import Axios from "axios";
 import { Field, Form, Formik } from "formik";
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { ImageFilterFrames } from "material-ui/svg-icons";
 
 
 const style = {
@@ -40,6 +41,8 @@ export interface NetworkState {
 
 const Network: React.FC = () => {
     const [NetworkState, setNetworkState] = useState();
+    const [formState, setForm] = useState(false);
+    const [snackBarState, setSnackBar] = useState(false);
     const [layers, setLayers] = useState([
         {
             id: 1,
@@ -115,58 +118,52 @@ const Network: React.FC = () => {
                     </IconButton>
                 <ExpansionPanel defaultExpanded style={style}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                    
-                    
 
                     <h3>Network: {layers.length} Layers</h3>
-                    
 
-                    
                     </ExpansionPanelSummary>
+                    
                     <ExpansionPanelDetails>
                     
                    
                     <Formik initialValues={{title: '', description: '', creator: '', saved: false}} onSubmit={(data, {setSubmitting}) => {
-                        //var saved = false;
-                        
+                        setSnackBar(false);
                         const newNetwork = {
-                            //id: layers.length + 1,
                             name: data.title,
                             description: data.description,
                             creator: data.creator,
                             layers: layers
                         };
-                        
+                       if(formState) {
+                        Axios ({
+                            url: `/api/networks/${formState}`, 
+                            method: 'DELETE',
+                        })
+                        .catch(() => {
+                            alert("Could not update, error communicating with server");
+                        }) 
+                    }   
                         Axios ({
                             url: '/api/networks',
                             method: 'POST',
-                            data: newNetwork
+                            data: newNetwork,
+                            responseType: 'stream'
                         })
-                        .then(() => {
-                            console.log('Data has been sent to the server');
-                            data.saved = true;
+                        .then((response) =>  {
+                            setForm(response.data._id);
+                            setSnackBar(true);
                             setSubmitting(false);
-            
-                            //setStatus(true);
 
                         })
                         .catch(() => {
-                            //alert("Could not save, error communicating with server");
+                            alert("Could not save, error communicating with server");
                         })
-                        
-                        console.log(data);
-                        console.log(layers);
-                        
-                        
                     }}>
                         
                         {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
                             
-                            
-                            
-                            
-                            <h4>Save your model</h4>
+                <h4>{formState ? "Update your model" : "Save your model"}</h4>
                             <p>Share your creation with other members on the networks community page.</p>
                             <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} />
                             <Divider light />
@@ -175,10 +172,10 @@ const Network: React.FC = () => {
                             <Field disabled={isSubmitting}  multiline label="Description" name="description" rows={3} as={TextField} />
                             <Divider/>
                             <ExpansionPanelActions>
-                            <Button color="primary" disabled={isSubmitting} type="submit">Share Network</Button>
+                            <Button color="primary" disabled={isSubmitting} type="submit">{(formState) ? "Update Net" : "Save Net"}</Button>
                             </ExpansionPanelActions>
                             
-                            {(isSubmitting) && <CustomizedSnackbars />}
+                            {(snackBarState) && <CustomizedSnackbars />}
                         </form>
                         
                     )}</Formik>

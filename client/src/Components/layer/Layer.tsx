@@ -125,8 +125,9 @@ const Layer: React.FC<LayerProps> = ({
                     <h3>Layer {id}</h3>
                     <span style={spanStyle}>{type}  {width}  {activation}</span>
                     </ExpansionPanelSummary>
+                   
                     <ExpansionPanelDetails>
-                    <Divider />
+                    
                     
                     <LayerForm
                         initialValues={{ type, width, activation }}
