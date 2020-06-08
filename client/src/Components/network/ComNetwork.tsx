@@ -12,15 +12,16 @@ export interface Network {
 }
 
 const style = {
-    border: "1px dashed gray",
-    padding: "0.5rem .5rem",
-    marginBottom: ".5rem",
-    backgroundColor: "white",
-    cursor: "pointer",
-    width: 600
+    display: "flex",
+    flexDirection: "column",
+    flexShrink: 1,
+    flexGrow: 0,
+    flexBasis: 360,
+    margin: 10,
+    padding: "0px 25px 10px 25px",
+    boxShadow: "0px 0px 12px rgba(0,0,0,0.25)",
+    backgroundColor: "#fff",
 };
-
-
 
 const ComNetwork: React.FC<Network> = ({
     name, description, creator, id, layers
@@ -47,26 +48,20 @@ const ComNetwork: React.FC<Network> = ({
 
     return (
         <div style={style}>
-            <Container>
-                <Row>
-                    <Col md={3}><h2>{network.name}</h2></Col>
-                    <Col md={3}><h3>{network.creator}</h3></Col>
-                </Row>
-                <Row xs={1} md={2}>
-                    <Col md={3}>{network.description}</Col>
-                    <Col md={3}>
-                        <h4>Layers:</h4>
-                        <table style={{ width: "100%" }}>
-                            <tr>
-                                <th>Type</th>
-                                <th>Width</th>
-                                <th>Activation</th>
-                            </tr>
-                            {network.layers.map((layer) => writeLayer(layer))}
-                        </table>
-                    </Col>
-                </Row>
-            </Container>
+            <h2>{network.name}</h2>
+            <h4>by {network.creator}</h4>
+            {network.description}
+
+            <h3>Layers:</h3>
+            <table style={{ width: "100%" }}>
+                <tr>
+                    <th>Type</th>
+                    <th>Width</th>
+                    <th>Activation</th>
+                </tr>
+                {network.layers.map((layer) => writeLayer(layer))}
+            </table>
+
         </div>
     );
 };

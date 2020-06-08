@@ -6,7 +6,11 @@ import { IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 const style = {
-    width: 400,
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "column",
+    flexShrink: 1,
+    flexGrow: 0,
 };
 
 const buttonStyle = {
@@ -16,6 +20,16 @@ const buttonStyle = {
     boxShadow: "4px 4px 12px rgba(0, 0, 0, 0.25)",
 };
 
+export interface Layer { id: number; type: string; width: number; activation: string }
+
+export interface Network {
+    name: string,
+    description: string,
+    creator: string,
+    id: string,
+    layers: Layer[],
+}
+
 export interface Item {
     id: number;
     type: string;
@@ -23,31 +37,33 @@ export interface Item {
     activation: string;
 }
 
-export interface NetworkState {
-    layers: Item[];
-}
-
 const Network: React.FC = () => {
-    const [layers, setLayers] = useState([
-        {
-            id: 1,
-            type: "Conv2d",
-            width: 128,
-            activation: "ReLU",
-        },
-        {
-            id: 2,
-            type: "MaxPool2d",
-            width: 64,
-            activation: "Sigmoid",
-        },
-        {
-            id: 3,
-            type: "Linear",
-            width: 10,
-            activation: "Softmax",
-        },
-    ]);
+    const [layers, setLayers] = useState(
+        [
+            {
+                id: 1,
+                type: "Conv2d",
+                width: 128,
+                activation: "ReLU",
+            },
+            {
+                id: 2,
+                type: "MaxPool2d",
+                width: 64,
+                activation: "Sigmoid",
+            },
+            {
+                id: 3,
+                type: "Linear",
+                width: 10,
+                activation: "Softmax",
+            },
+        ]);
+
+    const name = "Test Name";
+    const description = "Lorem Ipsum etc etc";
+    const creator = "test creator";
+    const id = "test ID not a real ID";
 
     const moveLayer = useCallback(
         (dragIndex: number, hoverIndex: number) => {
@@ -92,19 +108,24 @@ const Network: React.FC = () => {
     };
 
     return (
-        <>
-            <Container>
+        <Container>
+            <Col md={4}>
+            </Col>
+            <Col md={8}>
                 <Row>
-                    <h1>Network: {layers.length} Layers</h1>
-                    <IconButton onClick={addLayer} style={buttonStyle}>
-                        <AddIcon />
-                    </IconButton>
+                    <Col md={10}><h1>Network: {layers.length} Layers</h1></Col>
+                    <Col md={2}>
+                        <IconButton onClick={addLayer} style={buttonStyle}>
+                            <AddIcon />
+                        </IconButton>
+                    </Col>
                 </Row>
                 <div id="layerContainer" style={style}>
                     {layers.map((layer, i) => renderLayer(layer, i))}
                 </div>
-            </Container>
-        </>
+            </Col>
+
+        </Container>
     );
 };
 
