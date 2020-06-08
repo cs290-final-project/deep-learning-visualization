@@ -61,7 +61,7 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
                     <div style={formContainerStyle}>
                         {renderSelector("type", types)}
                         <FormControl style={formItem}>
-                            <Field name="width" render={({ placeholder, field }) => {
+                            <Field name="width" render={( {placeholder} : { placeholder: string}, {field} : { field: any} ) => {
                                 return <TextField label={"Width"} placeholder={placeholder} {...field} />;
                             }} />
                         </FormControl>

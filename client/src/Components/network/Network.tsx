@@ -15,14 +15,14 @@ const style = {
     flexDirection: "column",
     flexShrink: 1,
     flexGrow: 0,
-};
+} as React.CSSProperties;;
 
 const buttonStyle = {
     backgroundColor: "#f00",
     cursor: "pointer",
     color: "#fff",
     boxShadow: "4px 4px 12px rgba(0, 0, 0, 0.25)",
-};
+} as React.CSSProperties;;
 
 export interface Layer { id: number; type: string; width: number; activation: string }
 

@@ -24,7 +24,7 @@ const style = {
     padding: "0px 25px 10px 25px",
     boxShadow: "0px 0px 12px rgba(0,0,0,0.25)",
     backgroundColor: "#fff",
-};
+} as React.CSSProperties;
 
 
 const ComNetwork: React.FC<Network> = ({
