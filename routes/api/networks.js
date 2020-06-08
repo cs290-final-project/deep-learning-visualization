@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     const newNetwork = new Network({
         name: req.body.name,
         description: req.body.description,
-        author: req.body.author,
+        creator: req.body.creator,
         layers: req.body.layers
         //other fields will go here
     });

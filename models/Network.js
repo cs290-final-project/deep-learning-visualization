@@ -42,7 +42,8 @@ const NetworkSchema = new Schema({
     },
     creator: {
         type: String,
-        required: false
+        required: false,
+        Default: "Anonymous"
     },
     date: {
         type: Date,
