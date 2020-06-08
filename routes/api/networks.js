@@ -14,6 +14,12 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 });
 
+
+router.get('match/:id', (req, res) => {
+    Network.findById(req.params.id)
+        .then(items => res.json(items))
+});
+
 // @route POST api/items
 // @desc Create a visualization
 // @access Public

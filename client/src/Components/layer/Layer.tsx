@@ -3,18 +3,27 @@ import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 import LayerForm from "./LayerForm";
-import { FormControl, Card, TextField } from "@material-ui/core";
+import { FormControl, Divider, Card, TextField } from "@material-ui/core";
 
 const style = {
     //border: "1px dashed gray",
-    padding: "1.0rem 1.0rem",
+    //padding: "1.0rem 1.0rem",
     //backgroundColor: "grey",
     marginBottom: ".5rem",
     backgroundColor: "transparent",
     cursor: "move",
-    transition: "0.5s"
+    transition: "0.5s",
+    display: "flex",
+    flexDirection: "column",
+    flexShrink: 1,
+    flexGrow: 0,
+    flexBasis: 360,
+    margin: 10,
+    padding: "0px 15px 10px 15px",
+    boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
+  
 
-};
+} as React.CSSProperties;
 
 export interface LayerProps {
     id: any;
@@ -98,14 +107,14 @@ const Layer: React.FC<LayerProps> = ({
         }),
     });
 
-    const opacity = isDragging ? 0 : 1;
+    const opacity = isDragging ? 0.5 : 1;
     drag(drop(ref));
     return (
         <div style={{ alignContent: "center" }}>
-            <div ref={ref} style={{ ...style, opacity }}>
-                <Card>
-                    <TextField id="standard-required" defaultValue={`Layer ${id}`} />
-
+            <div ref={ref} style={{opacity}}>
+                <Card style={{ ...style}}>
+                    <h3>Layer {id}</h3>
+                    <Divider />
 
                     <LayerForm
                         initialValues={{ type, width, activation }}
