@@ -3,7 +3,8 @@ import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 import MyForm from "./MyForm";
-import { FormControl, Card, TextField } from "@material-ui/core";
+import { Divider, FormControl, Card, TextField } from "@material-ui/core";
+
 
 const style = {
   //border: "1px dashed gray",
@@ -104,7 +105,8 @@ const Layer: React.FC<LayerProps> = ({
     <div style={{ alignContent: "center" }}>
       <div ref={ref} style={{ ...style, opacity }}>
       <Card>
-      <TextField id="standard-required" defaultValue={`Layer ${id}`} />
+        <h3>Layer {id}</h3>
+       <Divider />
        
         
         <MyForm

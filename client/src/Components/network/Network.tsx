@@ -3,14 +3,17 @@ import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
 import CustomizedSnackbars from "./Snackbar";
 import { Container, Row, Col } from "react-bootstrap";
-import { Snackbar, Card, Button, IconButton, TextField, TextareaAutosize } from "@material-ui/core";
+import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Divider, Snackbar, Card, Button, IconButton, TextField, TextareaAutosize } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Axios from "axios";
 import { Field, Form, Formik } from "formik";
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 const style = {
-    width: 400,
+    width: "400px",
+    maxWidth: "400px"
 };
 
 const buttonStyle = {
@@ -105,15 +108,23 @@ const Network: React.FC = () => {
 
     return (
         <>
-            <Container>
+            <Container style={style}>
+                
                 <Row>
-                    <h1>Network: {layers.length} Layers</h1>
-                    <IconButton onClick={addLayer} style={buttonStyle}>
+                <IconButton onClick={addLayer} style={buttonStyle}>
                         <AddIcon />
                     </IconButton>
+                <ExpansionPanel defaultExpanded>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                    
+                    <h3>Network: {layers.length} Layers</h3>
+                    
 
-            
-                    <Card>
+                    
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                    
+                   
                     <Formik initialValues={{title: '', description: '', creator: '', saved: false}} onSubmit={(data, {setSubmitting}) => {
                         //var saved = false;
                         
@@ -134,6 +145,7 @@ const Network: React.FC = () => {
                             console.log('Data has been sent to the server');
                             data.saved = true;
                             setSubmitting(false);
+            
                             //setStatus(true);
 
                         })
@@ -149,17 +161,28 @@ const Network: React.FC = () => {
                         
                         {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
-                            <div><Field disabled={isSubmitting} variant="outlined" required="true" label="Network Title" name="title" as={TextField} /> </div>
-                            <Field disabled={isSubmitting} variant="outlined" label="Creator" name="creator" as={TextField} />
-                            <Field disabled={isSubmitting} variant="outlined" multiline label="Description" name="description" rows={3} as={TextField} />
                             
-                            <pre>{JSON.stringify(values, null, 2)}</pre>
-                            <Button variant="outlined" color="primary" disabled={isSubmitting} type="submit">Submit</Button>
+                            
+                            
+                            
+                            <h4>Save your model</h4>
+                            <p>Share your creation with other members on the networks community page.</p>
+                            <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} />
+                            <Divider light />
+                            <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} />
+                            <Divider light />
+                            <Field disabled={isSubmitting}  multiline label="Description" name="description" rows={3} as={TextField} />
+                            <Divider/>
+                            <ExpansionPanelActions>
+                            <Button color="primary" disabled={isSubmitting} type="submit">Share Network</Button>
+                            </ExpansionPanelActions>
+                            
                             {(isSubmitting) && <CustomizedSnackbars />}
                         </form>
                         
                     )}</Formik>
-                    </Card>
+                    </ExpansionPanelDetails>
+                    </ExpansionPanel>
                 </Row>
                 <div id="layerContainer" style={style}>
                     {layers.map((layer, i) => renderLayer(layer, i))}
