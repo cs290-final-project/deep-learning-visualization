@@ -33,7 +33,7 @@ interface Props {
     onSubmit: (values: Values) => void;
 }
 
-const MyForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
+const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
 
     const renderSelector = (name: string, options: string[]) => {
         return (
@@ -75,4 +75,4 @@ const MyForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
     );
 };
 
-export default MyForm;
+export default LayerForm;

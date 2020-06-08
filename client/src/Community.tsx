@@ -1,13 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ComNetwork from "./Components/network/ComNetwork";
-import axios from 'axios';
-
-export interface Layer { id: number; type: string; width: number; activation: string }
-
-import React, { useCallback, useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import ComNetwork from "./Components/network/ComNetwork";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import axios from 'axios';
 

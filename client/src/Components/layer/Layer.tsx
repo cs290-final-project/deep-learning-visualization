@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
-import MyForm from "./MyForm";
+import LayerForm from "./LayerForm";
 import { FormControl, Card, TextField } from "@material-ui/core";
 
 const style = {
@@ -107,7 +107,7 @@ const Layer: React.FC<LayerProps> = ({
                     <TextField id="standard-required" defaultValue={`Layer ${id}`} />
 
 
-                    <MyForm
+                    <LayerForm
                         initialValues={{ type, width, activation }}
                         onSubmit={({ type }) => {
                             console.log(type);
