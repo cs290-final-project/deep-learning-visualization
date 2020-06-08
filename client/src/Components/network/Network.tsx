@@ -1,9 +1,13 @@
 import update from "immutability-helper";
 import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
+import CustomizedSnackbars from "./Snackbar";
 import { Container, Row, Col } from "react-bootstrap";
-import { IconButton } from "@material-ui/core";
+import { Snackbar, Card, Button, IconButton, TextField, TextareaAutosize } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import Axios from "axios";
+import { Field, Form, Formik } from "formik";
+
 
 const style = {
     display: "flex",
@@ -37,33 +41,37 @@ export interface Item {
     activation: string;
 }
 
-const Network: React.FC = () => {
-    const [layers, setLayers] = useState(
-        [
-            {
-                id: 1,
-                type: "Conv2d",
-                width: 128,
-                activation: "ReLU",
-            },
-            {
-                id: 2,
-                type: "MaxPool2d",
-                width: 64,
-                activation: "Sigmoid",
-            },
-            {
-                id: 3,
-                type: "Linear",
-                width: 10,
-                activation: "Softmax",
-            },
-        ]);
+export interface NetworkState {
+    name: string;
+    creator: string;
+    description: string;
+    layers: Item[];
+}
 
-    const name = "Test Name";
-    const description = "Lorem Ipsum etc etc";
-    const creator = "test creator";
-    const id = "test ID not a real ID";
+
+
+const Network: React.FC = () => {
+    const [NetworkState, setNetworkState] = useState();
+    const [layers, setLayers] = useState([
+        {
+            id: 1,
+            type: "Conv2d",
+            width: 128,
+            activation: "ReLU",
+        },
+        {
+            id: 2,
+            type: "MaxPool2d",
+            width: 64,
+            activation: "Sigmoid",
+        },
+        {
+            id: 3,
+            type: "Linear",
+            width: 10,
+            activation: "Softmax",
+        },
+    ]);
 
     const moveLayer = useCallback(
         (dragIndex: number, hoverIndex: number) => {
@@ -107,18 +115,67 @@ const Network: React.FC = () => {
         setLayers([...layers, newLayer]);
     };
 
+
+
     return (
         <Container>
             <Col md={4}>
             </Col>
             <Col md={8}>
                 <Row>
-                    <Col md={10}><h1>Network: {layers.length} Layers</h1></Col>
-                    <Col md={2}>
-                        <IconButton onClick={addLayer} style={buttonStyle}>
-                            <AddIcon />
-                        </IconButton>
-                    </Col>
+                    <h1>Network: {layers.length} Layers</h1>
+                    <IconButton onClick={addLayer} style={buttonStyle}>
+                        <AddIcon />
+                    </IconButton>
+
+
+                    <Card>
+                        <Formik initialValues={{ title: '', description: '', creator: '', saved: false }} onSubmit={(data, { setSubmitting }) => {
+                            //var saved = false;
+
+                            const newNetwork = {
+                                //id: layers.length + 1,
+                                name: data.title,
+                                description: data.description,
+                                creator: data.creator,
+                                layers: layers
+                            };
+
+                            Axios({
+                                url: '/api/networks',
+                                method: 'POST',
+                                data: newNetwork
+                            })
+                                .then(() => {
+                                    console.log('Data has been sent to the server');
+                                    data.saved = true;
+                                    setSubmitting(false);
+                                    //setStatus(true);
+
+                                })
+                                .catch(() => {
+                                    //alert("Could not save, error communicating with server");
+                                })
+
+                            console.log(data);
+                            console.log(layers);
+
+
+                        }}>
+
+                            {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
+                                <form onSubmit={handleSubmit}>
+                                    <div><Field disabled={isSubmitting} variant="outlined" required="true" label="Network Title" name="title" as={TextField} /> </div>
+                                    <Field disabled={isSubmitting} variant="outlined" label="Creator" name="creator" as={TextField} />
+                                    <Field disabled={isSubmitting} variant="outlined" multiline label="Description" name="description" rows={3} as={TextField} />
+
+                                    <pre>{JSON.stringify(values, null, 2)}</pre>
+                                    <Button variant="outlined" color="primary" disabled={isSubmitting} type="submit">Submit</Button>
+                                    {(isSubmitting) && <CustomizedSnackbars />}
+                                </form>
+
+                            )}</Formik>
+                    </Card>
                 </Row>
                 <div id="layerContainer" style={style}>
                     {layers.map((layer, i) => renderLayer(layer, i))}

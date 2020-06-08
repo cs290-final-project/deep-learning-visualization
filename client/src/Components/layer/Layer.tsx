@@ -2,16 +2,18 @@ import React, { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
-import LayerForm from "./LayerForm";
+import MyForm from "./MyForm";
+import { FormControl, Card, TextField } from "@material-ui/core";
 
 const style = {
-    border: "1px dashed gray",
-    padding: "0.5rem .5rem",
+    //border: "1px dashed gray",
+    padding: "1.0rem 1.0rem",
+    //backgroundColor: "grey",
     marginBottom: ".5rem",
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     cursor: "move",
-    transition: "0.5s",
-    width: 400,
+    transition: "0.5s"
+
 };
 
 export interface LayerProps {
@@ -101,13 +103,18 @@ const Layer: React.FC<LayerProps> = ({
     return (
         <div style={{ alignContent: "center" }}>
             <div ref={ref} style={{ ...style, opacity }}>
-                <h1>Layer {id}</h1>
-                <LayerForm
-                    initialValues={{ type, width, activation }}
-                    onSubmit={({ type }) => {
-                        console.log(type);
-                    }}
-                />
+                <Card>
+                    <TextField id="standard-required" defaultValue={`Layer ${id}`} />
+
+
+                    <MyForm
+                        initialValues={{ type, width, activation }}
+                        onSubmit={({ type }) => {
+                            console.log(type);
+                        }}
+
+                    />
+                </Card>
             </div>
         </div>
     );
