@@ -12,8 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 const style = {
-    width: "400px",
-    maxWidth: "400px",
+     maxWidth: "550px",
 } as React.CSSProperties;
 
 const buttonStyle = {
@@ -117,6 +116,8 @@ const Network: React.FC = () => {
                 <ExpansionPanel defaultExpanded style={style}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                     
+                    
+
                     <h3>Network: {layers.length} Layers</h3>
                     
 

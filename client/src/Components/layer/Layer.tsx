@@ -3,7 +3,9 @@ import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 import LayerForm from "./LayerForm";
-import { FormControl, Divider, Card, TextField } from "@material-ui/core";
+import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, FormControl, Divider, Card, TextField } from "@material-ui/core";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { grey } from "@material-ui/core/colors";
 
 const style = {
     //border: "1px dashed gray",
@@ -23,6 +25,12 @@ const style = {
     boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
   
 
+} as React.CSSProperties;
+
+const spanStyle = {
+    color: "grey",
+    marginTop: "23px",
+    marginLeft: "15px"
 } as React.CSSProperties;
 
 export interface LayerProps {
@@ -112,10 +120,14 @@ const Layer: React.FC<LayerProps> = ({
     return (
         <div style={{ alignContent: "center" }}>
             <div ref={ref} style={{opacity}}>
-                <Card style={{ ...style}}>
+                <ExpansionPanel defaultExpanded style={{ ...style}}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                     <h3>Layer {id}</h3>
+                    <span style={spanStyle}>{type}  {width}  {activation}</span>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
                     <Divider />
-
+                    
                     <LayerForm
                         initialValues={{ type, width, activation }}
                         onSubmit={({ type }) => {
@@ -123,7 +135,8 @@ const Layer: React.FC<LayerProps> = ({
                         }}
 
                     />
-                </Card>
+                </ExpansionPanelDetails>
+                </ExpansionPanel>
             </div>
         </div>
     );
