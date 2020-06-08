@@ -13,9 +13,19 @@ export interface Network {
     id: string,
     layers: Layer[],
 }
+
 export interface Networks {
     nets: Network[];
 }
+
+const containerStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    alignContent: "center",
+    padding: "50px 10%",
+    backgroundColor: "#ddd"
+};
+
 const Community: React.FC = () => {
     const [networks, useNetworks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -53,11 +63,10 @@ const Community: React.FC = () => {
 
     return (
         <>
-            <Container>
-
-                {loading ? <LinearProgress /> : <h1>Community Networks</h1>}
+            {loading ? <LinearProgress /> : <h6>Successfully loaded!</h6>}
+            <div style={containerStyle}>
                 {networks.map((net) => renderNetwork(net))}
-            </Container>
+            </div>
         </>
     );
 };
