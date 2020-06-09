@@ -3,17 +3,19 @@ import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
 import CustomizedSnackbars from "./Snackbar";
 import { Container, Row, Col } from "react-bootstrap";
-import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Divider, Snackbar, Card, Button, IconButton, TextField, TextareaAutosize } from "@material-ui/core";
+import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Divider, Snackbar, Card, Button, IconButton, TextField, TextareaAutosize, InputAdornment } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Axios from "axios";
 import { Field, Form, Formik } from "formik";
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ImageFilterFrames } from "material-ui/svg-icons";
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
-const style = {
-     maxWidth: "550px",
+const formStyle = {
+    boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
+    padding: "0px 15px",
 } as React.CSSProperties;
 
 const buttonStyle = {
@@ -21,6 +23,15 @@ const buttonStyle = {
     cursor: "pointer",
     color: "#fff",
     boxShadow: "4px 4px 12px rgba(0, 0, 0, 0.25)",
+    height: 35,
+    width: 35,
+    marginLeft: 15,
+    marginBottom: 0,
+    marginTop: 15,
+};
+
+const fieldStyle = {
+    height: 200,
 };
 
 export interface Item {
@@ -36,8 +47,6 @@ export interface NetworkState {
     description: string;
     layers: Item[];
 }
-
-
 
 const Network: React.FC = () => {
     const [NetworkState, setNetworkState] = useState();
@@ -106,87 +115,84 @@ const Network: React.FC = () => {
         setLayers([...layers, newLayer]);
     };
 
- 
+
 
     return (
-        <>
-            <Container style={style}>
-                
-                <Row>
-                <IconButton onClick={addLayer} style={buttonStyle}>
-                        <AddIcon />
-                    </IconButton>
-                <ExpansionPanel defaultExpanded style={style}>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+        <div style={{ backgroundColor: "#eee" }}>
+            <Container>
 
-                    <h3>Network: {layers.length} Layers</h3>
+                <Col md={6} style={{ marginTop: 10 }}>
+                    <ExpansionPanel defaultExpanded style={formStyle}>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
 
-                    </ExpansionPanelSummary>
-                    
-                    <ExpansionPanelDetails>
-                    
-                   
-                    <Formik initialValues={{title: '', description: '', creator: '', saved: false}} onSubmit={(data, {setSubmitting}) => {
-                        setSnackBar(false);
-                        const newNetwork = {
-                            name: data.title,
-                            description: data.description,
-                            creator: data.creator,
-                            layers: layers
-                        };
-                       if(formState) {
-                        Axios ({
-                            url: `/api/networks/${formState}`, 
-                            method: 'DELETE',
-                        })
-                        .catch(() => {
-                            alert("Could not update, error communicating with server");
-                        }) 
-                    }   
-                        Axios ({
-                            url: '/api/networks',
-                            method: 'POST',
-                            data: newNetwork,
-                            responseType: 'stream'
-                        })
-                        .then((response) =>  {
-                            setForm(response.data._id);
-                            setSnackBar(true);
-                            setSubmitting(false);
+                            <h3>Network: {layers.length} Layers</h3>
+                            <IconButton onClick={addLayer} style={buttonStyle}>
+                                <AddIcon />
+                            </IconButton>
 
-                        })
-                        .catch(() => {
-                            alert("Could not save, error communicating with server");
-                        })
-                    }}>
-                        
-                        {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
-                        <form onSubmit={handleSubmit}>
-                            
-                <h4>{formState ? "Update your model" : "Save your model"}</h4>
-                            <p>Share your creation with other members on the networks community page.</p>
-                            <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} />
-                            <Divider light />
-                            <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} />
-                            <Divider light />
-                            <Field disabled={isSubmitting}  multiline label="Description" name="description" rows={3} as={TextField} />
-                            <Divider/>
-                            <ExpansionPanelActions>
-                            <Button color="primary" disabled={isSubmitting} type="submit">{(formState) ? "Update Net" : "Save Net"}</Button>
-                            </ExpansionPanelActions>
-                            
-                            {(snackBarState) && <CustomizedSnackbars />}
-                        </form>
-                        
-                    )}</Formik>
-                    </ExpansionPanelDetails>
+                        </ExpansionPanelSummary>
+
+                        <ExpansionPanelDetails>
+
+
+                            <Formik initialValues={{ title: '', description: '', creator: '', saved: false }} onSubmit={(data, { setSubmitting }) => {
+                                setSnackBar(false);
+                                const newNetwork = {
+                                    name: data.title,
+                                    description: data.description,
+                                    creator: data.creator,
+                                    layers: layers
+                                };
+                                if (formState) {
+                                    Axios({
+                                        url: `/api/networks/${formState}`,
+                                        method: 'DELETE',
+                                    })
+                                        .catch(() => {
+                                            alert("Could not update, error communicating with server");
+                                        })
+                                }
+                                Axios({
+                                    url: '/api/networks',
+                                    method: 'POST',
+                                    data: newNetwork,
+                                    responseType: 'stream'
+                                })
+                                    .then((response) => {
+                                        setForm(response.data._id);
+                                        setSnackBar(true);
+                                        setSubmitting(false);
+
+                                    })
+                                    .catch(() => {
+                                        alert("Could not save, error communicating with server");
+                                    })
+                            }}>
+
+                                {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
+                                    <form onSubmit={handleSubmit}>
+
+                                        <h4 style={{ marginTop: 0 }}>{formState ? "Update your model" : "Save your model"}</h4>
+                                        <p>Share your creation with other members on the networks community page.</p>
+                                        <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} fullWidth variant="outlined" margin='normal' />
+                                        <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} fullWidth variant="outlined" margin='normal' />
+                                        <Field disabled={isSubmitting} multiline label="Description" name="description" rows={3} as={TextField} fullWidth variant="outlined" margin='normal' />
+                                        <ExpansionPanelActions>
+                                            <Button variant="contained" size="large" color="primary" disabled={isSubmitting} type="submit">{(formState) ? "Update Net" : "Save Net"}</Button>
+                                        </ExpansionPanelActions>
+
+                                        {(snackBarState) && <CustomizedSnackbars />}
+                                    </form>
+
+                                )}</Formik>
+                        </ExpansionPanelDetails>
                     </ExpansionPanel>
-                </Row>
-                <div id="layerContainer">
+                </Col>
+                <Col md={6} id="layerContainer">
                     {layers.map((layer, i) => renderLayer(layer, i))}
-                </div>
+                </Col>
             </Container>
-        </>
+        </div>
     );
 };
 
