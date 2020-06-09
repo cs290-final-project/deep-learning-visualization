@@ -3,16 +3,10 @@ import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 import LayerForm from "./LayerForm";
-import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, FormControl, Divider, Card, TextField } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { grey } from "@material-ui/core/colors";
 
 const style = {
-    //border: "1px dashed gray",
-    //padding: "1.0rem 1.0rem",
-    //backgroundColor: "grey",
     marginBottom: ".5rem",
-    backgroundColor: "transparent",
+    backgroundColor: "#fff",
     cursor: "move",
     transition: "0.5s",
     display: "flex",
@@ -23,7 +17,6 @@ const style = {
     margin: 10,
     padding: "0px 15px 10px 15px",
     boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
-  
 
 } as React.CSSProperties;
 
@@ -119,25 +112,25 @@ const Layer: React.FC<LayerProps> = ({
     drag(drop(ref));
     return (
         <div style={{ alignContent: "center" }}>
-            <div ref={ref} style={{opacity}}>
-                <ExpansionPanel defaultExpanded style={{ ...style}}>
+            <div ref={ref} style={{ opacity }}>
+                {/* <ExpansionPanel defaultExpanded style={{ ...style }}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                    <h3>Layer {id}</h3>
-                    <span style={spanStyle}>{type}  {width}  {activation}</span>
+                        <h3>Layer {id}</h3>
+                        <span style={spanStyle}>{type}  {width}  {activation}</span>
                     </ExpansionPanelSummary>
-                   
-                    <ExpansionPanelDetails>
-                    
-                    
-                    <LayerForm
-                        initialValues={{ type, width, activation }}
-                        onSubmit={({ type }) => {
-                            console.log(type);
-                        }}
 
-                    />
-                </ExpansionPanelDetails>
-                </ExpansionPanel>
+                    <ExpansionPanelDetails> */}
+
+
+                <LayerForm
+                    initialValues={{ id, type, width, activation }}
+                    onSubmit={({ type }) => {
+                        console.log(type);
+                    }}
+
+                />
+                {/* </ExpansionPanelDetails> */}
+                {/* </ExpansionPanel> */}
             </div>
         </div>
     );

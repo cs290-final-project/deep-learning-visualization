@@ -3,14 +3,11 @@ import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
 import CustomizedSnackbars from "./Snackbar";
 import { Container, Row, Col } from "react-bootstrap";
-import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Divider, Snackbar, Card, Button, IconButton, TextField, TextareaAutosize, InputAdornment } from "@material-ui/core";
+import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, IconButton, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Axios from "axios";
-import { Field, Form, Formik } from "formik";
-import Typography from '@material-ui/core/Typography';
+import { Field, Formik } from "formik";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { ImageFilterFrames } from "material-ui/svg-icons";
-import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 const formStyle = {
@@ -118,7 +115,7 @@ const Network: React.FC = () => {
 
 
     return (
-        <div style={{ backgroundColor: "#eee" }}>
+        <div>
             <Container>
 
                 <Col md={6} style={{ marginTop: 10 }}>
@@ -172,7 +169,7 @@ const Network: React.FC = () => {
                                 {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
                                     <form onSubmit={handleSubmit}>
 
-                                        <h4 style={{ marginTop: 0 }}>{formState ? "Update your model" : "Save your model"}</h4>
+                                        <h4>{formState ? "Update your model" : "Save your model"}</h4>
                                         <p>Share your creation with other members on the networks community page.</p>
                                         <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} fullWidth variant="outlined" margin='normal' />

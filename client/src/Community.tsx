@@ -18,12 +18,11 @@ export interface Networks {
     nets: Network[];
 }
 
-const containerStyle  = {
+const containerStyle = {
     display: "flex",
     flexWrap: "wrap",
     alignContent: "center",
-    padding: "50px 10%",
-    backgroundColor: "#ddd"
+    padding: "10px 10%",
 } as React.CSSProperties;
 
 const Community: React.FC = () => {

@@ -1,8 +1,8 @@
-import { FormControl, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, FormControl, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 import { Field, Form, Formik, FieldProps } from "formik";
-import { TextFieldProps } from "material-ui";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import * as React from "react";
-import { render } from "@testing-library/react";
+import { Row } from "react-bootstrap";
 
 interface Values {
     type: string;
@@ -14,6 +14,32 @@ const formItem = {
     width: 130,
     margin: 10,
 };
+
+const style = {
+    //border: "1px dashed gray",
+    //padding: "1.0rem 1.0rem",
+    //backgroundColor: "grey",
+    marginBottom: "0.5rem",
+    backgroundColor: "#fff",
+    cursor: "move",
+    transition: "0.25s",
+    display: "flex",
+    flexDirection: "column",
+    flexShrink: 1,
+    flexGrow: 0,
+    flexBasis: 360,
+    margin: 10,
+    padding: "0px 15px 0px 15px",
+    boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
+
+} as React.CSSProperties;
+
+
+const spanStyle = {
+    color: "grey",
+    marginTop: "10px",
+    marginLeft: "15px"
+} as React.CSSProperties;
 
 const formContainerStyle = {
     display: "flex",
@@ -27,6 +53,7 @@ const types = ["Conv2d", "MaxPool2d", "Linear"];
 
 interface Props {
     initialValues: {
+        id: string,
         type: string;
         width: number;
         activation: string;
@@ -51,25 +78,30 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
     }
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={(values) => {
-                onSubmit(values);
-            }}
-        >
+        <Formik initialValues={initialValues} onSubmit={(values) => { onSubmit(values); }}>
             {({ values }) => (
                 <Form>
-                    <div style={formContainerStyle}>
-                        {renderSelector("type", types)}
-                        <FormControl style={formItem}>
-                            <Field name="width" render={(props: FieldProps) => {
-                                return <TextField label={"Width"} {...props.field} />;
-                            }} />
-                        </FormControl>
-                        {renderSelector("activation", funcs)}
-                    </div>
-                    {/* <Button type="submit">submit</Button> */}
-                    <pre>{JSON.stringify(values, null, 2)}</pre>
+                    <ExpansionPanel defaultExpanded style={{ ...style }}>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                            <h4>Layer {values.id}</h4>
+                            <span style={spanStyle}>{values.type}  {values.width}  {values.activation}</span>
+                        </ExpansionPanelSummary>
+
+                        <ExpansionPanelDetails style={{ display: "block" }}>
+
+                            <Row style={formContainerStyle}>
+                                {renderSelector("type", types)}
+                                <FormControl style={formItem}>
+                                    <Field name="width" render={(props: FieldProps) => {
+                                        return <TextField label={"Width"} {...props.field} />;
+                                    }} />
+                                </FormControl>
+                                {renderSelector("activation", funcs)}
+                            </Row>
+                            <Row style={{ margin: 5, }}><pre>
+                                {JSON.stringify(values, null, 2)}
+                            </pre></Row>
+                        </ExpansionPanelDetails></ExpansionPanel>
                 </Form>
             )}
         </Formik>
