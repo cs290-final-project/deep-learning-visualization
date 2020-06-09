@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 import LayerForm from "./LayerForm";
@@ -113,24 +115,21 @@ const Layer: React.FC<LayerProps> = ({
     return (
         <div style={{ alignContent: "center" }}>
             <div ref={ref} style={{ opacity }}>
-                {/* <ExpansionPanel defaultExpanded style={{ ...style }}>
+                <ExpansionPanel defaultExpanded style={{ ...style }}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                         <h3>Layer {id}</h3>
                         <span style={spanStyle}>{type}  {width}  {activation}</span>
                     </ExpansionPanelSummary>
 
-                    <ExpansionPanelDetails> */}
-
-
-                <LayerForm
-                    initialValues={{ id, type, width, activation }}
-                    onSubmit={({ type }) => {
-                        console.log(type);
-                    }}
-
-                />
-                {/* </ExpansionPanelDetails> */}
-                {/* </ExpansionPanel> */}
+                    <ExpansionPanelDetails>
+                        <LayerForm
+                            initialValues={{ type, width, activation }}
+                            onSubmit={({ type }) => {
+                                console.log(type);
+                            }}
+                        />
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
             </div>
         </div>
     );

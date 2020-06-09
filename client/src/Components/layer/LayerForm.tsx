@@ -1,4 +1,4 @@
-import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, FormControl, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
+import { FormControl, TextField, Select, InputLabel, MenuItem } from "@material-ui/core";
 import { Field, Form, Formik, FieldProps } from "formik";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import * as React from "react";
@@ -11,7 +11,7 @@ interface Values {
 }
 
 const formItem = {
-    width: 130,
+    width: "33%",
     margin: 10,
 };
 
@@ -46,6 +46,12 @@ const formContainerStyle = {
     flex: "row wrap",
     justifyContent: "center",
     padding: 10,
+    paddingTop: 0,
+    paddingBottom: 0,
+
+    flexShrink: 1,
+    flexGrow: 0,
+    flexBasis: 360,
 };
 
 const funcs = ["ReLU", "Sigmoid", "Softmax"];
@@ -53,7 +59,6 @@ const types = ["Conv2d", "MaxPool2d", "Linear"];
 
 interface Props {
     initialValues: {
-        id: string,
         type: string;
         width: number;
         activation: string;
@@ -80,28 +85,17 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
     return (
         <Formik initialValues={initialValues} onSubmit={(values) => { onSubmit(values); }}>
             {({ values }) => (
-                <Form>
-                    <ExpansionPanel defaultExpanded style={{ ...style }}>
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                            <h4>Layer {values.id}</h4>
-                            <span style={spanStyle}>{values.type}  {values.width}  {values.activation}</span>
-                        </ExpansionPanelSummary>
-
-                        <ExpansionPanelDetails style={{ display: "block" }}>
-
-                            <Row style={formContainerStyle}>
-                                {renderSelector("type", types)}
-                                <FormControl style={formItem}>
-                                    <Field name="width" render={(props: FieldProps) => {
-                                        return <TextField label={"Width"} {...props.field} />;
-                                    }} />
-                                </FormControl>
-                                {renderSelector("activation", funcs)}
-                            </Row>
-                            <Row style={{ margin: 5, }}><pre>
-                                {JSON.stringify(values, null, 2)}
-                            </pre></Row>
-                        </ExpansionPanelDetails></ExpansionPanel>
+                <Form style={{ width: "100%" }}>
+                    <div style={formContainerStyle}>
+                        {renderSelector("type", types)}
+                        <FormControl style={formItem}>
+                            <Field name="width" render={(props: FieldProps) => {
+                                return <TextField label={"Width"} {...props.field} />;
+                            }} />
+                        </FormControl>
+                        {renderSelector("activation", funcs)}
+                    </div>
+                    <pre style={{ margin: 5, }}>{JSON.stringify(values, null, 2)}</pre>
                 </Form>
             )}
         </Formik>
