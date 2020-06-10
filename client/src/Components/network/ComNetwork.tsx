@@ -60,7 +60,7 @@ const ComNetwork: React.FC<Network> = ({
             {network.description}
             <h3 style={redText}>Layers:</h3>
             <table style={{ width: "100%" }}>
-                <tr style={redText}>
+                <tr>
                     <th>Type</th>
                     <th>Width</th>
                     <th>Activation</th>

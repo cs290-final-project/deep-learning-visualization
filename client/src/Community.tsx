@@ -62,7 +62,7 @@ const Community: React.FC = () => {
 
     return (
         <>
-            {loading ? <LinearProgress /> : <h6>Successfully loaded!</h6>}
+            {loading ? <LinearProgress /> : null}
             <div style={containerStyle}>
                 {networks.map((net) => renderNetwork(net))}
             </div>
