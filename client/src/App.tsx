@@ -5,7 +5,6 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Network from "./Components/network/Network";
 import Community from "./Community";
 import { Button } from "@material-ui/core";
-import Helmet from "react-helmet";
 
 const buttonStyle = {
     display: "inline-block",
