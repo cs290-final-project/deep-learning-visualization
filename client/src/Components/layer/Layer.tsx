@@ -115,21 +115,12 @@ const Layer: React.FC<LayerProps> = ({
     return (
         <div style={{ alignContent: "center" }}>
             <div ref={ref} style={{ opacity }}>
-                <ExpansionPanel defaultExpanded style={{ ...style }}>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                        <h3>Layer {id}</h3>
-                        <span style={spanStyle}>{type}  {width}  {activation}</span>
-                    </ExpansionPanelSummary>
-
-                    <ExpansionPanelDetails>
-                        <LayerForm
-                            initialValues={{ type, width, activation }}
-                            onSubmit={({ type }) => {
-                                console.log(type);
-                            }}
-                        />
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
+                <LayerForm
+                    initialValues={{ type, width, activation }}
+                    onSubmit={({ type }) => {
+                        console.log(type);
+                    }}
+                />
             </div>
         </div>
     );

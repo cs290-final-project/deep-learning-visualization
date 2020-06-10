@@ -23,9 +23,12 @@ const style = {
     margin: 10,
     padding: "0px 25px 10px 25px",
     boxShadow: "0px 0px 12px rgba(0,0,0,0.25)",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
 } as React.CSSProperties;
 
+const redText = {
+    color: "#e8243c"
+} as React.CSSProperties;
 
 const ComNetwork: React.FC<Network> = ({
     name, description, creator, id, layers
@@ -52,12 +55,12 @@ const ComNetwork: React.FC<Network> = ({
 
     return (
         <Card style={style}>
-            <h2>{network.name}</h2>
+            <h2 style={redText}>{network.name}</h2>
             <h4>by {network.creator}</h4>
             {network.description}
-            <h3>Layers:</h3>
+            <h3 style={redText}>Layers:</h3>
             <table style={{ width: "100%" }}>
-                <tr>
+                <tr style={redText}>
                     <th>Type</th>
                     <th>Width</th>
                     <th>Activation</th>

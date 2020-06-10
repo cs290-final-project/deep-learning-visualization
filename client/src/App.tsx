@@ -9,7 +9,7 @@ import Community from "./Community";
 function App() {
     return (
         <BrowserRouter>
-            <div className="App" style={{ backgroundColor: "#eee" }}>
+            <div className="App" style={{ backgroundColor: "#2b2c44", color: "#fff" }}>
                 <h1>Vis-AI (header a Work in Progress)</h1>
                 <Link to="/">Home   </Link>
                 <Link to="/network">New Network</Link>

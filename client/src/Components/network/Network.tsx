@@ -16,7 +16,7 @@ const formStyle = {
 } as React.CSSProperties;
 
 const buttonStyle = {
-    backgroundColor: "#f00",
+    backgroundColor: "#e8243c",
     cursor: "pointer",
     color: "#fff",
     boxShadow: "4px 4px 12px rgba(0, 0, 0, 0.25)",
@@ -27,9 +27,7 @@ const buttonStyle = {
     marginTop: 15,
 };
 
-const fieldStyle = {
-    height: 200,
-};
+const redText = { color: "#e8243c" } as React.CSSProperties;
 
 export interface Item {
     id: number;
@@ -169,13 +167,13 @@ const Network: React.FC = () => {
                                 {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
                                     <form onSubmit={handleSubmit}>
 
-                                        <h4>{formState ? "Update your model" : "Save your model"}</h4>
+                                        <h4 style={redText}>{formState ? "Update your model" : "Save your model"}</h4>
                                         <p>Share your creation with other members on the networks community page.</p>
                                         <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <Field disabled={isSubmitting} multiline label="Description" name="description" rows={3} as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <ExpansionPanelActions>
-                                            <Button variant="contained" size="large" color="primary" disabled={isSubmitting} type="submit">{(formState) ? "Update Net" : "Save Net"}</Button>
+                                            <Button variant="contained" size="large" style={{ color: "#fff", backgroundColor: "#e8243c" }} disabled={isSubmitting} type="submit">{(formState) ? "Update Net" : "Save Net"}</Button>
                                         </ExpansionPanelActions>
 
                                         {(snackBarState) && <CustomizedSnackbars />}
