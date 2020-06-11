@@ -42,7 +42,7 @@ const NetworkSchema = new Schema({
     },
     creator: {
         type: String,
-        required: false,
+        required: true,
         Default: "Anonymous"
     },
     date: {
@@ -72,4 +72,3 @@ const NetworkSchema = new Schema({
 });
 
 module.exports = Network = mongoose.model('network', NetworkSchema);
-//module.exports = Layer = mongoose.model('layer', LayerSchema);

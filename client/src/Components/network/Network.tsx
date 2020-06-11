@@ -4,12 +4,13 @@ import Layer from "../layer/Layer";
 import CustomizedSnackbars from "./Snackbar";
 import { Container, Col } from "react-bootstrap";
 import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
-import { Button, IconButton, TextField } from "@material-ui/core";
+import { FormControlLabel, Checkbox, Button, IconButton, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Axios from "axios";
 import { Field, Formik } from "formik";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "../../index.css";
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 const Network: React.FC = () => {
     const [NetworkState, setNetworkState] = useState();
@@ -86,13 +87,19 @@ const Network: React.FC = () => {
 
                 <Col md={6} style={{ marginTop: 10 }}>
                     <ExpansionPanel defaultExpanded className="networkForm">
-                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content">
 
-                            <h3>Network: {layers.length} Layers</h3>
-                            <IconButton onClick={addLayer} className="addNetworkButton">
-                                <AddIcon />
-                            </IconButton>
-
+                           
+                            <FormControlLabel
+                            aria-label="Add Layer"
+                            onClick={(event) => event.stopPropagation()}
+                            onFocus={(event) => event.stopPropagation()}
+                            control={<IconButton onClick={(addLayer)} className="addNetworkButton">
+                            <PostAddIcon fontSize="large"/>
+                        </IconButton>}
+                            label=""
+                        /> 
+                        <h3>Network: {layers.length} Layers</h3>
                         </ExpansionPanelSummary>
 
                         <ExpansionPanelDetails>
@@ -137,9 +144,9 @@ const Network: React.FC = () => {
 
                                         <h4 className="red">{formState ? "Update your model" : "Save your model"}</h4>
                                         <p>Share your creation with other members on the networks community page.</p>
-                                        <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} fullWidth variant="outlined" margin='normal' />
-                                        <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} fullWidth variant="outlined" margin='normal' />
-                                        <Field disabled={isSubmitting} multiline label="Description" name="description" rows={3} as={TextField} fullWidth variant="outlined" margin='normal' />
+                                        <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} fullWidth  margin='normal' />
+                                        <Field disabled={isSubmitting} required="true" label="Creator" name="creator" as={TextField} fullWidth  margin='normal' />
+                                        <Field disabled={isSubmitting} multiline label="Description" name="description" rows={3} as={TextField} fullWidth  margin='normal' />
                                         <ExpansionPanelActions>
                                             <Button className="materialButton" disabled={isSubmitting} type="submit">{(formState) ? "Update Network" : "Save Network"}</Button>
                                         </ExpansionPanelActions>
