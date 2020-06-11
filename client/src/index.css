@@ -122,10 +122,4 @@ header {
     height: 64px;
     width: 100%;
     padding: 16px;
-    background-color: #2b2d42;
-    position: fixed;
-}
-
-.content {
-    padding-top: 64px;
 }

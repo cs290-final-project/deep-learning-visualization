@@ -42,7 +42,7 @@ const Community: React.FC = () => {
     return (
         <>
             {loading ? <LinearProgress /> : null}
-            <div className="community page content">
+            <div className="community page">
                 {networks.map((net) => renderNetwork(net))}
             </div>
         </>

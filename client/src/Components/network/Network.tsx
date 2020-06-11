@@ -81,7 +81,7 @@ const Network: React.FC = () => {
 
 
     return (
-        <div className="content">
+        <div>
             <Container>
 
                 <Col md={6} style={{ marginTop: 10 }}>
