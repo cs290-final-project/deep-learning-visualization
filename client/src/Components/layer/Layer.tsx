@@ -1,32 +1,8 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
-import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ItemTypes from "./ItemTypes";
 import { XYCoord } from "dnd-core";
 import LayerForm from "./LayerForm";
-
-const style = {
-    marginBottom: ".5rem",
-    backgroundColor: "#fff",
-    cursor: "move",
-    transition: "0.5s",
-    display: "flex",
-    flexDirection: "column",
-    flexShrink: 1,
-    flexGrow: 0,
-    flexBasis: 360,
-    margin: 10,
-    padding: "0px 15px 10px 15px",
-    boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
-
-} as React.CSSProperties;
-
-const spanStyle = {
-    color: "grey",
-    marginTop: "23px",
-    marginLeft: "15px"
-} as React.CSSProperties;
 
 export interface LayerProps {
     id: any;
@@ -113,15 +89,9 @@ const Layer: React.FC<LayerProps> = ({
     const opacity = isDragging ? 0.5 : 1;
     drag(drop(ref));
     return (
-        <div style={{ alignContent: "center" }}>
-            <div ref={ref} style={{ opacity }}>
-                <LayerForm
-                    initialValues={{ type, width, activation }}
-                    onSubmit={({ type }) => {
-                        console.log(type);
-                    }}
-                />
-            </div>
+        <div style={{ alignContent: "center", opacity }} ref={ref}>
+            <LayerForm initialValues={{ type, width, activation }}
+                onSubmit={({ type }) => { console.log(type); }} />
         </div>
     );
 };

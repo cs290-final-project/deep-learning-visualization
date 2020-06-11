@@ -1,29 +1,9 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import ComNetwork from "./Components/network/ComNetwork";
-import { CircularProgress, LinearProgress } from "@material-ui/core";
+import { LinearProgress } from "@material-ui/core";
+import { Layer, Network, Networks } from "./Interfaces";
 import axios from 'axios';
-
-export interface Layer { id: number; type: string; width: number; activation: string }
-
-export interface Network {
-    name: string,
-    description: string,
-    creator: string,
-    id: string,
-    layers: Layer[],
-}
-
-export interface Networks {
-    nets: Network[];
-}
-
-const containerStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    alignContent: "center",
-    padding: "10px 10%",
-} as React.CSSProperties;
+import "./index.css";
 
 const Community: React.FC = () => {
     const [networks, useNetworks] = useState([]);
@@ -49,7 +29,6 @@ const Community: React.FC = () => {
         layers: Layer[],
     }) => {
         return (
-
             <ComNetwork
                 name={network.name}
                 description={network.description}
@@ -63,7 +42,7 @@ const Community: React.FC = () => {
     return (
         <>
             {loading ? <LinearProgress /> : null}
-            <div style={containerStyle}>
+            <div className="community page content">
                 {networks.map((net) => renderNetwork(net))}
             </div>
         </>

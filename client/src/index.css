@@ -11,3 +11,121 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiFormControl-root.formItem {
+    width: 33%;
+    margin: 10px;
+}
+
+.formContainer {
+    display: flex;
+    flex: row wrap;
+    justify-content: center;
+    padding: 5;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex: 1 0 360;
+}
+
+.MuiPaper-root.MuiExpansionPanel-root.layerForm.MuiExpansionPanel-rounded {
+    margin-bottom: 0.5rem;
+    color: #e8243c;
+    background-color: #fff;
+    cursor: move;
+    transition: 0.25s;
+    min-width: 360px;
+    margin: 10px;
+    padding: 0px 15px 0px 15px;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.15);
+}
+
+.MuiIconButton-root.addNetworkButton {
+    background-color: #e8243c;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+    height: 35px;
+    width: 35px;
+    margin: 15px 2px 2px 15px;
+}
+
+.MuiIconButton-root.addNetworkButton:hover {
+    background-color: #e8243c;
+    height: 39px;
+    width: 39px;
+    margin: 13px 0px 0px 13px;
+}
+
+.MuiExpansionPanel-root.networkForm {
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.15);
+    padding: 0px 15px;
+    margin-top: 10px;
+}
+
+.red {
+    color: #e8243c;
+}
+
+.MuiButton-root.materialButton {
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+    color: #fff;
+    background-color: #e8243c;
+    height: 32px;
+    width: 124px;
+    margin: 2px;
+    font-size: 11px;
+    float: right;
+}
+
+.MuiButton-root.materialButton:hover {
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.15);
+    color: #fff;
+    background-color: #e8243c;
+    height: 36px;
+    width: 128px;
+    margin: 0px;
+    font-size: 12px;
+}
+
+.community.network {
+    margin-bottom: .5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 360px;
+    margin: 10px;
+    padding: 0px 25px 10px 25px;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.25);
+    background-color: #fff;
+}
+
+.community.page {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.App {
+    background-color: #2b2d42;
+    color: #fff;
+}
+
+.header.image {
+    height: 64px;
+    margin: -16px;
+    padding: 0px;
+}
+
+header {
+    height: 64px;
+    width: 100%;
+    padding: 16px;
+    background-color: #2b2d42;
+    position: fixed;
+}
+
+.content {
+    padding-top: 64px;
+}

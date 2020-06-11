@@ -1,34 +1,7 @@
 import React, { useCallback, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Card, CardContent, Typography } from "@material-ui/core";
-
-export interface Layer { id: number; type: string; width: number; activation: string }
-
-export interface Network {
-    name: string,
-    description: string,
-    creator: string,
-    id: string,
-    layers: Layer[],
-}
-
-const style = {
-    marginBottom: ".5rem",
-    cursor: "pointer",
-    display: "flex",
-    flexDirection: "column",
-    flexShrink: 1,
-    flexGrow: 0,
-    flexBasis: 360,
-    margin: 10,
-    padding: "0px 25px 10px 25px",
-    boxShadow: "0px 0px 12px rgba(0,0,0,0.25)",
-    backgroundColor: "#fff"
-} as React.CSSProperties;
-
-const redText = {
-    color: "#e8243c"
-} as React.CSSProperties;
+import { Card } from "@material-ui/core";
+import { Layer, Network } from "../../Interfaces";
+import "../../index.css";
 
 const ComNetwork: React.FC<Network> = ({
     name, description, creator, id, layers
@@ -41,9 +14,7 @@ const ComNetwork: React.FC<Network> = ({
         layers: layers,
     });
 
-    const writeLayer = (
-        layer: { id: number; type: string; width: number; activation: string }
-    ) => {
+    const writeLayer = (layer: Layer) => {
         return (
             <tr>
                 <td>{layer.type}</td>
@@ -54,11 +25,11 @@ const ComNetwork: React.FC<Network> = ({
     };
 
     return (
-        <Card style={style}>
-            <h2 style={redText}>{network.name}</h2>
+        <Card className="community network">
+            <h2 className="red">{network.name}</h2>
             <h4>by {network.creator}</h4>
             {network.description}
-            <h3 style={redText}>Layers:</h3>
+            <h3 className="red">Layers:</h3>
             <table style={{ width: "100%" }}>
                 <tr>
                     <th>Type</th>

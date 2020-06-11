@@ -2,46 +2,14 @@ import update from "immutability-helper";
 import React, { useCallback, useState } from "react";
 import Layer from "../layer/Layer";
 import CustomizedSnackbars from "./Snackbar";
-import { Container, Row, Col } from "react-bootstrap";
-import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, IconButton, TextField } from "@material-ui/core";
+import { Container, Col } from "react-bootstrap";
+import { ExpansionPanelActions, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from "@material-ui/core";
+import { Button, IconButton, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Axios from "axios";
 import { Field, Formik } from "formik";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
-const formStyle = {
-    boxShadow: "0px 0px 12px rgba(0,0,0,0.15)",
-    padding: "0px 15px",
-} as React.CSSProperties;
-
-const buttonStyle = {
-    backgroundColor: "#e8243c",
-    cursor: "pointer",
-    color: "#fff",
-    boxShadow: "4px 4px 12px rgba(0, 0, 0, 0.25)",
-    height: 35,
-    width: 35,
-    marginLeft: 15,
-    marginBottom: 0,
-    marginTop: 15,
-};
-
-const redText = { color: "#e8243c" } as React.CSSProperties;
-
-export interface Item {
-    id: number;
-    type: string;
-    width: number;
-    activation: string;
-}
-
-export interface NetworkState {
-    name: string;
-    creator: string;
-    description: string;
-    layers: Item[];
-}
+import "../../index.css";
 
 const Network: React.FC = () => {
     const [NetworkState, setNetworkState] = useState();
@@ -113,15 +81,15 @@ const Network: React.FC = () => {
 
 
     return (
-        <div>
+        <div className="content">
             <Container>
 
                 <Col md={6} style={{ marginTop: 10 }}>
-                    <ExpansionPanel defaultExpanded style={formStyle}>
+                    <ExpansionPanel defaultExpanded className="networkForm">
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
 
                             <h3>Network: {layers.length} Layers</h3>
-                            <IconButton onClick={addLayer} style={buttonStyle}>
+                            <IconButton onClick={addLayer} className="addNetworkButton">
                                 <AddIcon />
                             </IconButton>
 
@@ -167,13 +135,13 @@ const Network: React.FC = () => {
                                 {(({ values, handleChange, isSubmitting, handleBlur, handleSubmit }) =>
                                     <form onSubmit={handleSubmit}>
 
-                                        <h4 style={redText}>{formState ? "Update your model" : "Save your model"}</h4>
+                                        <h4 className="red">{formState ? "Update your model" : "Save your model"}</h4>
                                         <p>Share your creation with other members on the networks community page.</p>
                                         <Field disabled={isSubmitting} required="true" label="Network Title" name="title" as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <Field disabled={isSubmitting} label="Creator" name="creator" as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <Field disabled={isSubmitting} multiline label="Description" name="description" rows={3} as={TextField} fullWidth variant="outlined" margin='normal' />
                                         <ExpansionPanelActions>
-                                            <Button variant="contained" size="large" style={{ color: "#fff", backgroundColor: "#e8243c" }} disabled={isSubmitting} type="submit">{(formState) ? "Update Net" : "Save Net"}</Button>
+                                            <Button className="materialButton" disabled={isSubmitting} type="submit">{(formState) ? "Update Network" : "Save Network"}</Button>
                                         </ExpansionPanelActions>
 
                                         {(snackBarState) && <CustomizedSnackbars />}
