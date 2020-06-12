@@ -93,6 +93,9 @@ const Layer: React.FC<LayerProps> = ({
       <LayerForm
         initialValues={{ type, width, activation }}
         onSubmit={({ type }) => {
+          type = type;
+          width = width;
+          activation = activation;
           console.log(type);
         }}
       />
