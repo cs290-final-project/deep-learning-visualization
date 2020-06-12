@@ -72,7 +72,7 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
                 onClick={(event) => event.stopPropagation()}
                 onFocus={(event) => event.stopPropagation()}
                 control={
-                  <IconButton className="NetworkButton">
+                  <IconButton type="submit" className="NetworkButton">
                     <Save fontSize="large" />
                   </IconButton>
                 }
