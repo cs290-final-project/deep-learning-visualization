@@ -96,7 +96,7 @@ const Network: React.FC = () => {
 
   const downloadNetwork = () => {
     window.open(
-      "https://gist.github.com/Andrew-Pynch/286f73737bb3c36b505315653d1f916b/archive/b49de6a9f3b644c38aca08df8f02d7c143c4e0c2.zip"
+      "https://gist.github.com/ShaurGaur/e10a85d25161daf05d1f74536f1fe8bf/archive/ce353ad3799a3651754efb1f9456a8d02efa7bde.zip"
     );
   };
 

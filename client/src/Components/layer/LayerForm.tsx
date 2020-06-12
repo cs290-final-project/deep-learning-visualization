@@ -1,19 +1,23 @@
 import {
+  Button,
+  ExpansionPanel,
+  ExpansionPanelActions,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  FormControlLabel,
+  IconButton,
   FormControl,
   TextField,
   Select,
   InputLabel,
   MenuItem,
 } from "@material-ui/core";
-import {
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-} from "@material-ui/core";
 import { Field, Form, Formik, FieldProps } from "formik";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import * as React from "react";
 import "../../index.css";
+import { Persist } from "formik-persist";
+import Save from "@material-ui/icons/Save";
 
 interface Values {
   type: string;
@@ -63,6 +67,17 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
+              <FormControlLabel
+                aria-label="Add Layer"
+                onClick={(event) => event.stopPropagation()}
+                onFocus={(event) => event.stopPropagation()}
+                control={
+                  <IconButton className="NetworkButton">
+                    <Save fontSize="large" />
+                  </IconButton>
+                }
+                label=""
+              />
               <h4>
                 {values.type} {values.width} {values.activation}
               </h4>
@@ -90,6 +105,7 @@ const LayerForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
               <pre>{JSON.stringify(values, null, 2)}</pre>
             </ExpansionPanelDetails>
           </ExpansionPanel>
+          <Persist name="network-form" />
         </Form>
       )}
     </Formik>
